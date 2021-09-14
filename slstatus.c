@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include <errno.h>
+#include <locale.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -76,6 +77,8 @@ main(int argc, char *argv[])
 	sigaction(SIGTERM, &act, NULL);
 	act.sa_flags |= SA_RESTART;
 	sigaction(SIGUSR1, &act, NULL);
+
+	setlocale(LC_TIME, "");
 
 	if (!sflag && !(dpy = XOpenDisplay(NULL))) {
 		die("XOpenDisplay: Failed to open display");
